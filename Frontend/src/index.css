@@ -1,0 +1,530 @@
+/* RESET */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+
+body {
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* AUTH PAGES */
+
+.auth-container {
+  width: 100%;
+  height: 100vh;
+
+  background: linear-gradient(
+    to right,
+    #0f172a,
+    #1e293b
+  );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* AUTH FORM */
+
+.auth-form {
+  width: 400px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 18px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,0.2);
+}
+
+/* AUTH TITLE */
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #0f172a;
+  font-size: 32px;
+}
+
+/* AUTH INPUTS */
+
+.auth-form input {
+  padding: 15px;
+
+  border-radius: 12px;
+
+  border: 1px solid #ccc;
+
+  font-size: 15px;
+
+  outline: none;
+}
+
+/* AUTH BUTTON */
+
+.auth-form button {
+  padding: 15px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.auth-form button:hover {
+  background: #1d4ed8;
+}
+
+/* AUTH TEXT */
+
+.auth-form p {
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-form span {
+  color: #2563eb;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* MAIN LAYOUT */
+
+.main-chat-layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 320px;
+
+  background: #0f172a;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+  font-size: 34px;
+}
+
+/* USER LIST */
+
+.user-list {
+  margin-top: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* USER */
+
+.user {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  background: #1e293b;
+
+  padding: 15px;
+
+  border-radius: 14px;
+
+  margin-bottom: 12px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.user:hover {
+  background: #334155;
+}
+
+.active-user {
+  background: #2563eb;
+}
+
+/* AVATAR */
+
+.user-avatar,
+.header-avatar {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  color: #0f172a;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* USER INFO */
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ONLINE STATUS */
+
+.online-status {
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.online-dot {
+  width: 8px;
+  height: 8px;
+
+  background: #22c55e;
+
+  border-radius: 50%;
+
+  display: inline-block;
+
+  margin-right: 5px;
+}
+
+/* BUTTONS */
+
+.logout-btn,
+.theme-btn {
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  margin-bottom: 10px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+.logout-btn {
+  background: red;
+  color: white;
+}
+
+.theme-btn {
+  background: #facc15;
+}
+
+/* CHAT SECTION */
+
+.chat-section {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #f1f5f9;
+}
+
+/* CHAT HEADER */
+
+.chat-header {
+  height: 90px;
+
+  background: white;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 20px;
+
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-header h2 {
+  font-size: 28px;
+}
+
+.header-online {
+  color: green;
+  font-size: 14px;
+}
+
+/* MESSAGES */
+
+.messages {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #e2e8f0;
+}
+
+/* MESSAGE BOX */
+
+.my-message,
+.other-message {
+  max-width: 350px;
+
+  padding: 15px;
+
+  border-radius: 18px;
+
+  margin-bottom: 18px;
+
+  word-wrap: break-word;
+
+  box-shadow:
+    0 2px 10px
+    rgba(0,0,0,0.1);
+}
+
+/* MY MESSAGE */
+
+.my-message {
+  align-self: flex-end;
+
+  background: #2563eb;
+
+  color: white;
+}
+
+/* OTHER MESSAGE */
+
+.other-message {
+  align-self: flex-start;
+
+  background: white;
+
+  color: black;
+}
+
+/* IMAGES */
+
+.my-message img,
+.other-message img {
+  margin-top: 10px;
+
+  border-radius: 10px;
+
+  max-width: 100%;
+}
+
+/* FILE LINK */
+
+.my-message a,
+.other-message a {
+  display: block;
+
+  margin-top: 10px;
+
+  color: inherit;
+
+  text-decoration: underline;
+}
+
+/* TIME */
+
+.time {
+  display: block;
+
+  margin-top: 10px;
+
+  font-size: 12px;
+
+  opacity: 0.7;
+}
+
+/* INPUT AREA */
+
+.input-area {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 15px;
+
+  background: white;
+
+  border-top: 1px solid #ddd;
+}
+
+/* TEXT INPUT */
+
+.input-area input[type="text"] {
+  flex: 1;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  border: 1px solid #ccc;
+
+  font-size: 15px;
+}
+
+/* FILE INPUT */
+
+.input-area input[type="file"] {
+  max-width: 180px;
+}
+
+/* INPUT BUTTON */
+
+.input-area button {
+  padding: 14px 20px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #2563eb;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+.input-area button:hover {
+  background: #1d4ed8;
+}
+
+/* EMOJI BUTTON */
+
+.emoji-btn {
+  background: transparent !important;
+
+  color: black !important;
+
+  font-size: 25px;
+}
+
+/* EMOJI PICKER */
+
+.emoji-picker {
+  position: absolute;
+
+  bottom: 90px;
+
+  left: 350px;
+
+  z-index: 100;
+}
+
+/* TYPING */
+
+.typing-text {
+  padding-left: 20px;
+
+  color: gray;
+
+  margin-bottom: 5px;
+}
+
+/* DARK MODE */
+
+.dark .chat-section {
+  background: #1e293b;
+}
+
+.dark .messages {
+  background: #0f172a;
+}
+
+.dark .chat-header {
+  background: #111827;
+  color: white;
+}
+
+.dark .other-message {
+  background: #334155;
+  color: white;
+}
+
+.dark .input-area {
+  background: #111827;
+}
+
+.dark .input-area input {
+  background: #1e293b;
+  color: white;
+  border: 1px solid #475569;
+}
+
+.dark .emoji-btn {
+  color: white !important;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 768px) {
+
+  .main-chat-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 250px;
+  }
+
+  .chat-section {
+    flex: 1;
+  }
+
+  .messages {
+    padding: 12px;
+  }
+
+  .my-message,
+  .other-message {
+    max-width: 80%;
+  }
+
+  .emoji-picker {
+    left: 10px;
+    bottom: 120px;
+  }
+}
