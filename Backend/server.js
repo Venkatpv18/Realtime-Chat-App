@@ -64,7 +64,7 @@ const authRoutes =
   require("./routes/authRoutes");
 
 const uploadRoutes =
-  require("./routes/uploadRoutes");
+  require("./routes/UploadRoutes");
 
 app.use(
   "/api/auth",
@@ -188,6 +188,7 @@ io.on(
                 data.fileUrl,
 
               audioUrl:
+
                 data.audioUrl,
 
               time:
