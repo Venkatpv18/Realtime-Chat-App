@@ -1,35 +1,28 @@
-const express =
-  require("express");
+const express = require("express");
+const multer = require("multer");
+const path = require("path");
 
-const router =
-  express.Router();
+const router = express.Router();
 
-const upload =
-  require("../middleware/upload");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
 
-/* FILE UPLOAD */
+const upload = multer({ storage });
 
-router.post(
-  "/",
-
-  upload.single("file"),
-
-  (req, res) => {
-
-    if (!req.file) {
-
-      return res.status(400).json({
-        message: "No file uploaded",
-      });
-    }
-
-    res.json({
-
-      fileUrl:
-        `http://localhost:5000/uploads/${req.file.filename}`,
-    });
+router.post("/", upload.single("file"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No file uploaded" });
   }
-);
 
-module.exports =
-  router;
+  res.json({
+    fileUrl: `/uploads/${req.file.filename}`,
+  });
+});
+
+module.exports = router;
