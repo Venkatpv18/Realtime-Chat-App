@@ -6,7 +6,7 @@ A full-stack Real-Time Chat Application built using the **MERN Stack** (MongoDB,
 
 | Service | Status | Live URL |
 | :--- | :---: | :--- |
-| **Frontend Web App** | 🟢 Live | [Open Live App](https://realtime-chat-frontend.onrender.com) *(Update with your exact Render Frontend Static Site URL)* |
+| **Frontend Web App** | 🟢 Live | [Open Live App](https://realtime-chat-app-2-ojq7.onrender.com) |
 | **Backend REST API** | 🟢 Live | [https://realtime-chat-app-1-y08r.onrender.com](https://realtime-chat-app-1-y08r.onrender.com) |
 
 ---
