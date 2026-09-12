@@ -1,7 +1,15 @@
 # 💬 Real-Time Chat App
 
-A full-stack Real-Time Chat Application built using the MERN Stack, Socket.IO, and JWT Authentication. The application enables users to communicate 
-instantly through private messaging, share files, send voice messages, react to messages, and receive real-time notifications.
+A full-stack Real-Time Chat Application built using the **MERN Stack** (MongoDB, Express, React, Node.js), **Socket.IO**, and **JWT Authentication**.
+
+## 🌐 Live Demo & Deployment Links
+
+| Service | Status | Live URL |
+| :--- | :---: | :--- |
+| **Frontend Web App** | 🟢 Live | [Open Live App](https://realtime-chat-frontend.onrender.com) *(Update with your exact Render Frontend Static Site URL)* |
+| **Backend REST API** | 🟢 Live | [https://realtime-chat-app-1-y08r.onrender.com](https://realtime-chat-app-1-y08r.onrender.com) |
+
+---
 
 ## 🚀 Features
 
