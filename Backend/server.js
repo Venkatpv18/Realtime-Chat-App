@@ -45,8 +45,7 @@ const io =
   new Server(server, {
 
     cors: {
-      origin:
-        "http://localhost:5173",
+      origin: "*",
 
       methods: [
         "GET",
@@ -67,6 +66,15 @@ app.use(
   "/uploads",
   express.static("uploads")
 );
+
+/* HEALTH CHECK / ROOT ROUTE */
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "online",
+    message: "Realtime Chat API Backend Server is running successfully!",
+  });
+});
 
 /* ROUTES */
 
