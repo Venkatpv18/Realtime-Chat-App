@@ -13,6 +13,9 @@ const mongoose =
 const dotenv =
   require("dotenv");
 
+const dns =
+  require("dns");
+
 const {
   Server,
 } = require("socket.io");
@@ -20,6 +23,13 @@ const {
 /* CONFIG */
 
 dotenv.config();
+
+// Set public DNS servers to resolve MongoDB Atlas SRV records
+try {
+  dns.setServers(["8.8.8.8", "8.8.4.4"]);
+} catch (err) {
+  console.warn("Could not set custom DNS servers:", err.message);
+}
 
 /* EXPRESS */
 
@@ -81,18 +91,20 @@ app.use(
 mongoose.connect(
   process.env.MONGO_URI
 )
-
 .then(() => {
-
   console.log(
-    "MongoDB Connected"
+    "✅ MongoDB Connected"
   );
-
 })
-
 .catch((err) => {
-
-  console.log(err);
+  if (err.code === 8000 || err.message?.includes("bad auth")) {
+    console.error("❌ MongoDB Authentication Failed: Invalid username or password in MONGO_URI.");
+    console.error("👉 Please update the password in backend/.env to your correct MongoDB Atlas password.");
+  } else if (err.code === "ECONNREFUSED" || err.syscall === "querySrv") {
+    console.error("❌ MongoDB DNS Error: Unable to resolve cluster DNS.");
+  } else {
+    console.error("❌ MongoDB Connection Error:", err.message);
+  }
 });
 
 /* MODEL */
@@ -100,9 +112,9 @@ mongoose.connect(
 const Message =
   require("./models/Message");
 
-/* ONLINE USERS */
+/* ONLINE USERS TRACKER (Map username => socket count) */
 
-let onlineUsers = [];
+let onlineUsers = new Map();
 
 /* SOCKET CONNECTION */
 
@@ -112,8 +124,11 @@ io.on(
   async (socket) => {
 
     console.log(
-      "User Connected"
+      "User Connected:", socket.id
     );
+
+    // Send current list of unique online usernames
+    socket.emit("online_users", Array.from(onlineUsers.keys()));
 
     /* LOAD OLD MESSAGES */
 
@@ -142,24 +157,50 @@ io.on(
 
       (username) => {
 
-        socket.username =
-          username;
+        if (username) {
 
-        if (
-          !onlineUsers.includes(
-            username
-          )
-        ) {
+          socket.username = username;
 
-          onlineUsers.push(
-            username
+          const count = onlineUsers.get(username) || 0;
+
+          onlineUsers.set(username, count + 1);
+
+          io.emit(
+            "online_users",
+            Array.from(onlineUsers.keys())
           );
-        }
 
-        io.emit(
-          "online_users",
-          onlineUsers
-        );
+        }
+      }
+    );
+
+    /* DISCONNECT */
+
+    socket.on(
+      "disconnect",
+
+      () => {
+
+        if (socket.username) {
+
+          const count = onlineUsers.get(socket.username) || 1;
+
+          if (count <= 1) {
+
+            onlineUsers.delete(socket.username);
+
+          } else {
+
+            onlineUsers.set(socket.username, count - 1);
+
+          }
+
+          io.emit(
+            "online_users",
+            Array.from(onlineUsers.keys())
+          );
+
+        }
       }
     );
 
@@ -309,30 +350,6 @@ io.on(
       }
     );
 
-    /* DISCONNECT */
-
-    socket.on(
-      "disconnect",
-
-      () => {
-
-        console.log(
-          "User Disconnected"
-        );
-
-        onlineUsers =
-          onlineUsers.filter(
-            (user) =>
-              user !==
-              socket.username
-          );
-
-        io.emit(
-          "online_users",
-          onlineUsers
-        );
-      }
-    );
   }
 );
 

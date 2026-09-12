@@ -83,3 +83,14 @@ exports.loginUser = async (req, res) => {
     console.log(error);
   }
 };
+
+// GET ALL USERS
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, "username email _id").sort({ username: 1 });
+    res.status(200).json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to fetch users" });
+  }
+};
